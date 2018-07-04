@@ -23,9 +23,20 @@ public class ManagerServiceImpl implements ManagerService {
 
 
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS,readOnly = true)
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Manager> selectAllManager() {
-        List<Manager> managers = managerDao.selectAllManager();
-        return managers;
+        return managerDao.selectAllManager();
+    }
+
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public Manager selectManagerByName(String mgrName, String mgrpwd) {
+        Manager manager = managerDao.selectManagerByName(mgrName);
+        if (mgrpwd.equals(manager.getMgrPwd())) {
+            return manager;
+        } else {
+            return null;
+        }
     }
 }

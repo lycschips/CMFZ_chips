@@ -11,4 +11,6 @@ public interface ManagerService {
 
     public List<Manager> selectAllManager();
 
+    public Manager selectManagerByName(String mgrName,String mgrpwd);
+
 }

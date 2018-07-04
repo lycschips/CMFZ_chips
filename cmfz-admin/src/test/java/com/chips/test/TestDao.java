@@ -22,4 +22,11 @@ public class TestDao {
             System.out.println(manager);
         }
     }
+    @Test
+    public void TestManagerSelectbyname(){
+        ApplicationContext ctx=new ClassPathXmlApplicationContext("applicationContext.xml");
+        ManagerDao managerDao = (ManagerDao) ctx.getBean("managerDao");
+        Manager manager=managerDao.selectManagerByName("test");
+        System.out.println(manager);
+    }
 }

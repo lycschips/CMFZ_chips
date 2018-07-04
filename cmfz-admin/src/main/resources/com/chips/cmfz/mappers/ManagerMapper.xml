@@ -15,5 +15,10 @@
         manager
     </select>
 
+    <select id="selectManagerByName" resultMap="MANAGERRESULTMAP">
+        select *
+        from manager
+        where mgr_name=#{mgrName}
+    </select>
 
 </mapper>
