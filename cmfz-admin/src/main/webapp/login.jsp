@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html;utf-8" pageEncoding="utf-8" %>
+<%@page language="java" contentType="text/html;utf-8" pageEncoding="utf-8"  isELIgnored="false" %>
 <head>
 	<title>持名法州后台管理中心</title>
 			
@@ -13,26 +13,35 @@
 	<script type="text/javascript" src="script/common.js"></script>
 	<script type="text/javascript">
 	
-		$(function(){
+		$(function() {
 
-			//点击更换验证码：
-			$("#captchaImage").click(function(){//点击更换验证码
-				alert("自己做");
-			});
-			
-			//  form 表单提交
-			$("#loginForm").bind("submit",function(){
-			    if($("#mgrname").val()==""||$("#mgrpwd").val().length==0){
-			        alert("用户名和密码不能为空");
+            //点击更换验证码：
+            $("#captchaImage").click(function () {//点击更换验证码
+                $("#captchaImage").click(function () {//点击更换验证码
+                    var ac = $("#captchaImage").prop("src");
+                    $("#captchaImage").prop("src", ac + "?" + Math.random());
+                });
 
-				}else{
-                    return $("#loginForm").submit;
-				}
-			});
-		});
+                //  form 表单提交
+                $("#loginForm").bind("submit", function () {
+                    if ($("#mgrname").val() == "" || $("#mgrpwd").val().length == 0) {
+                        alert("用户名和密码不能为空");
+
+                    } else {
+                        return $("#loginForm").submit;
+                    }
+                });
+            });
+        });
+        function run() {
+            var str = "${cookie.checkremember.value}";
+            alert(str)
+            var newstr = decodeURI(str);
+            document.getElementById("mgrname").value=newstr;
+        }
 	</script>
 </head>
-<body>
+<body onload="run()">
 	
 		<div class="login">
 			<form id="loginForm" action="/cmfz/manager/login" method="post" >
@@ -47,7 +56,7 @@
 								用户名:
 							</th>
 							<td>
-								<input type="text" name="mgrname" class="text" value="" maxlength="20"/>
+								<input type="text" id="mgrname" name="mgrname" class="text" value="" maxlength="20"/>
 							</td>
 					  </tr>
 					  <tr>
@@ -55,7 +64,7 @@
 								密&nbsp;&nbsp;&nbsp;码:
 							</th>
 							<td>
-								<input type="password" name="mgrpwd" class="text" value="" maxlength="20" autocomplete="off"/>
+								<input type="password"  name="mgrpwd" class="text" value="" maxlength="20" autocomplete="off"/>
 							</td>
 					  </tr>
 					
@@ -64,7 +73,7 @@
 							<th>验证码:</th>
 							<td>
 								<input type="text" id="enCode" name="enCode" class="text captcha" maxlength="4" autocomplete="off"/>
-								<img id="captchaImage" class="captchaImage" src="img/captcha.jpg" title="点击更换验证码"/>
+								<img id="captchaImage" class="captchaImage" src="/cmfz/manager/getVcode" title="点击更换验证码"/>
 							</td>
 						</tr>					
 					<tr>
@@ -76,7 +85,7 @@
 						</th>
 						<td>
 							<label>
-								<input type="checkbox" id="isRememberUsername" value="true"/> 记住用户名
+								<input type="checkbox" name="checkremember" id="isRememberUsername" value="true"/> 记住用户名
 							</label>
 						</td>
 					</tr>

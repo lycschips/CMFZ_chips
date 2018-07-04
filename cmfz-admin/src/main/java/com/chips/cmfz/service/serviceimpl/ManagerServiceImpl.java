@@ -29,6 +29,10 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
 
+
+      /*实现管理员登陆功能 ：
+      mgrName(管理员登录名)，mgrpwd(管理员登录密码)
+     调用managerDao的selectManagerByName方法*/
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public Manager selectManagerByName(String mgrName, String mgrpwd) {
