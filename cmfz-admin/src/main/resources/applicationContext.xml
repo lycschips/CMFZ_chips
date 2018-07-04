@@ -21,7 +21,7 @@
     <!--配置mybatis的sqlsession工厂-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="typeAliases" value="com.chips.cmfz.entity"/>
+        <property name="typeAliasesPackage" value="com.chips.cmfz.entity"/>
         <property name="mapperLocations" value="classpath:com/chips/cmfz/mappers/*Mapper.xml"/>
     </bean>
 
